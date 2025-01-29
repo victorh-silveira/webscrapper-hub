@@ -2,6 +2,7 @@ import requests
 import base64
 import json
 import os
+import platform
 from typing import List, Dict, Optional
 
 BASE_URL = "https://sistemaswebb3-listados.b3.com.br/listedCompaniesProxy/CompanyCall/GetInitialCompanies/"
@@ -12,6 +13,7 @@ HEADERS = {
 PAGE_SIZE = 120
 TOTAL_PAGES = 25
 
+CLEAR_COMMAND = "cls" if platform.system() == "Windows" else "clear"
 
 def encodeToBase64(pageNumber: int, pageSize: int = PAGE_SIZE) -> str:
     payload = json.dumps({
@@ -20,7 +22,6 @@ def encodeToBase64(pageNumber: int, pageSize: int = PAGE_SIZE) -> str:
         "pageSize": pageSize
     })
     return base64.b64encode(payload.encode()).decode()
-
 
 def fetchPageData(pageNumber: int) -> Optional[List[Dict[str, str]]]:
     url = f"{BASE_URL}{encodeToBase64(pageNumber)}"
@@ -36,7 +37,6 @@ def fetchPageData(pageNumber: int) -> Optional[List[Dict[str, str]]]:
         print(f"Erro ao buscar página {pageNumber}: {e}")
         return None
 
-
 def saveToFile(data: List[Dict[str, str]], jsonFileName: str, txtFileName: str):
     try:
         with open(jsonFileName, "w", encoding="utf-8") as jsonFile:
@@ -51,7 +51,6 @@ def saveToFile(data: List[Dict[str, str]], jsonFileName: str, txtFileName: str):
     except IOError as e:
         print(f"Erro ao salvar arquivos: {e}")
 
-
 def main():
     empresas = []
     
@@ -59,14 +58,13 @@ def main():
         pageData = fetchPageData(page)
         if pageData:
             empresas.extend(pageData)
-            os.system('clear')
+            os.system(CLEAR_COMMAND)
             print(f"Página {page} coletada com sucesso!")
 
     if empresas:
         saveToFile(empresas, "empresasListadas.json", "empresasListadas.txt")
     else:
         print("Nenhum dado foi coletado.")
-
 
 if __name__ == "__main__":
     main()
