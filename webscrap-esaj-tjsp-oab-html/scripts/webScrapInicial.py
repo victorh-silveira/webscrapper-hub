@@ -64,7 +64,7 @@ def extractChildCases(session, baseUrl, cookies, processCode, court, pageNumber)
     childParams = {
         "paginaConsulta": str(pageNumber),
         "cbPesquisa": "NUMOAB",
-        "dadosConsulta.valorConsulta": "71.812",
+        "dadosConsulta.valorConsulta": "71.812",  # Campo variável para trocar o número da OAB
         "cdForo": "-1",
         "cdProcessoMaster": processCode,
         "cdForoProcesso": court,
