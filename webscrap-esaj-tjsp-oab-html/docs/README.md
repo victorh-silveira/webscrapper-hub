@@ -1,48 +1,62 @@
-Este projeto realiza web scraping para extrair dados de processos judiciais e converte os arquivos JSON resultantes para XLSX.
+# WebScrapGabriel
 
-📌 Índice
-Descrição
-Tecnologias Utilizadas
-Pré-requisitos
-Instalação
-Execução
-Estrutura do Projeto
-Docker
-Licença
-📌 Descrição
-O projeto acessa um site jurídico, coleta dados sobre processos e armazena os resultados no formato JSON. Em seguida, converte os arquivos JSON em planilhas XLSX para melhor visualização e análise dos dados.
+Este projeto realiza **web scraping** para extrair dados de processos judiciais e converte os arquivos **JSON** resultantes para **XLSX**.
 
-📌 Tecnologias Utilizadas
-Python 3.10
-BeautifulSoup4 (para scraping de HTML)
-Requests (para requisições HTTP)
-Pandas (para manipulação de dados)
-OpenPyXL (para conversão de JSON para XLSX)
-Docker (opcional para ambiente isolado)
-📌 Pré-requisitos
+---
+
+## 📌 Índice
+- [Descrição](#descrição)
+- [Tecnologias Utilizadas](#tecnologias-utilizadas)
+- [Pré-requisitos](#pré-requisitos)
+- [Instalação](#instalação)
+- [Execução](#execução)
+- [Estrutura do Projeto](#estrutura-do-projeto)
+- [Docker](#docker)
+- [Licença](#licença)
+
+---
+
+## 📌 Descrição
+
+O projeto acessa um site jurídico, coleta dados sobre processos e armazena os resultados no formato **JSON**. Em seguida, converte os arquivos JSON em planilhas **XLSX** para melhor visualização e análise dos dados.
+
+---
+
+## 📌 Tecnologias Utilizadas
+
+- **Python 3.10**
+- **BeautifulSoup4** (para scraping de HTML)
+- **Requests** (para requisições HTTP)
+- **Pandas** (para manipulação de dados)
+- **OpenPyXL** (para conversão de JSON para XLSX)
+- **Docker** (opcional para ambiente isolado)
+
+---
+
+## 📌 Pré-requisitos
+
 Antes de rodar o projeto, certifique-se de ter instalado:
 
-Python 3.10+
-Pip (gerenciador de pacotes do Python)
-Docker (caso queira rodar o projeto em container)
-📌 Instalação
-Clone o repositório:
+- **Python 3.10+**
+- **Pip** (gerenciador de pacotes do Python)
+- **Docker** (caso queira rodar o projeto em container)
 
-sh
-Copiar
-Editar
+---
+
+## 📌 Instalação
+
+### **Clone o repositório**
+```sh
 git clone https://github.com/seu-usuario/WebScrapGabriel.git
 cd WebScrapGabriel
-Crie um ambiente virtual (opcional, mas recomendado):
-
+Crie um ambiente virtual (opcional, mas recomendado)
 sh
 Copiar
 Editar
 python -m venv venv
 source venv/bin/activate  # Linux/macOS
-venv\Scripts\activate     # Windows
-Instale as dependências:
-
+venv\Scripts\activate   # Windows
+Instale as dependências
 sh
 Copiar
 Editar
@@ -95,3 +109,18 @@ Isso executará o scraper e salvará os arquivos JSON e XLSX na pasta data/.
 📌 Licença
 Este projeto está sob a Licença MIT. Você pode usá-lo e modificá-lo livremente.
 
+yaml
+Copiar
+Editar
+
+---
+
+### **📌 Como usar**
+1. **Copie** o conteúdo acima.
+2. **Cole no seu `README.md` no VSCode`.**
+3. **Salve e envie para o GitHub**:
+
+```sh
+git add README.md
+git commit -m "Adicionando README.md formatado"
+git push origin main
