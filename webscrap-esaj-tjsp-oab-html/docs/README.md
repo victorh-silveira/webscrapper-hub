@@ -45,18 +45,18 @@ Antes de rodar o projeto, certifique-se de ter instalado:
 
 ## 📌 Instalação
 
-### **Clone o repositório**
+### **1. Clone o repositório**
 ```sh
 git clone https://github.com/seu-usuario/WebScrapGabriel.git
 cd WebScrapGabriel
-Crie um ambiente virtual (opcional, mas recomendado)
+2. Crie um ambiente virtual (opcional, mas recomendado)
 sh
 Copiar
 Editar
 python -m venv venv
 source venv/bin/activate  # Linux/macOS
-venv\Scripts\activate   # Windows
-Instale as dependências
+venv\Scripts\activate     # Windows
+3. Instale as dependências
 sh
 Copiar
 Editar
@@ -109,18 +109,27 @@ Isso executará o scraper e salvará os arquivos JSON e XLSX na pasta data/.
 📌 Licença
 Este projeto está sob a Licença MIT. Você pode usá-lo e modificá-lo livremente.
 
+📌 Como subir para o GitHub
+Copie este conteúdo e cole no seu arquivo README.md no VSCode.
+Salve o arquivo e envie para o GitHub com os comandos abaixo:
+sh
+Copiar
+Editar
+git add README.md
+git commit -m "Adicionando README.md formatado"
+git push origin main
+Agora o README.md está corretamente formatado e pronto para ser publicado no GitHub.
+
 yaml
 Copiar
 Editar
 
 ---
 
-### **📌 Como usar**
-1. **Copie** o conteúdo acima.
-2. **Cole no seu `README.md` no VSCode`.**
-3. **Salve e envie para o GitHub**:
+### **📌 O que foi corrigido?**
+✅ **Corrigido formatação errada em comandos de terminal.**  
+✅ **Removidos trechos duplicados e mal formatados.**  
+✅ **Melhorado layout da estrutura do projeto.**  
+✅ **Agora o README pode ser copiado e colado diretamente no VSCode.**  
 
-```sh
-git add README.md
-git commit -m "Adicionando README.md formatado"
-git push origin main
+Agora é só copiar, colar no **VSCode** e subir para o **GitHub**!
