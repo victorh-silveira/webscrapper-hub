@@ -1,29 +1,51 @@
+import subprocess
 import os
-from scripts.webScraper import runScraper
-from scripts.jsonToXlsx import convertJsonToXlsx
 
-# Definir os diretórios de entrada e saída
-JSON_DIR = "data/json"
-XLSX_DIR = "data/xlsx"
+def runWebScrap():
+    print("\n=== Iniciando Web Scraping dos processos... ===\n")
+    subprocess.run(["python3", "scripts/webScrap.py"], check=True)
+
+def runJsonToXLSX(jsonFileName):
+    print(f"\n=== Convertendo {jsonFileName} para XLSX... ===\n")
+    subprocess.run(["python3", "scripts/jsonToXLSX.py"], input=jsonFileName.encode(), check=True)
+
+def getLatestFile(directory, prefix, extension):
+    files = [f for f in os.listdir(directory) if f.startswith(prefix) and f.endswith(extension)]
+    if not files:
+        return None
+    return max(files, key=lambda f: os.path.getctime(os.path.join(directory, f)))
+
+def askUserForNewQuery():
+    response = input("\nDeseja realizar outra consulta? (s/n): ").strip().lower()
+    return response == "s"
 
 def main():
-    # Criar diretórios se não existirem
-    os.makedirs(JSON_DIR, exist_ok=True)
-    os.makedirs(XLSX_DIR, exist_ok=True)
+    print("\n=== Sistema de Web Scraping do TJSP ===\n")
 
-    print("Iniciando o web scraping...")
-    runScraper()  # Executa o web scraper e gera arquivos JSON na pasta data/json
-    print("Web scraping concluído.")
+    while True:
+        jsonFile = getLatestFile("data/json", "oab-", ".json")
+        xlsxFile = getLatestFile("data/xlsx", "oab-", ".xlsx")
 
-    print("Convertendo arquivos JSON para XLSX...")
-    for json_file in os.listdir(JSON_DIR):
-        if json_file.endswith(".json"):
-            json_path = os.path.join(JSON_DIR, json_file)
-            xlsx_filename = json_file.replace(".json", ".xlsx")
-            xlsx_path = os.path.join(XLSX_DIR, xlsx_filename)
-            convertJsonToXlsx(json_path, xlsx_path)
+        if jsonFile or xlsxFile:
+            print("\nArquivos anteriores detectados:")
+            if jsonFile:
+                print(f" - Último JSON encontrado: {jsonFile}")
+            if xlsxFile:
+                print(f" - Último XLSX encontrado: {xlsxFile}")
+            
+            if not askUserForNewQuery():
+                print("\nEncerrando o programa.\n")
+                return
 
-    print("Conversão concluída. Todos os arquivos XLSX foram gerados.")
+        runWebScrap()
+
+        jsonFile = getLatestFile("data/json", "oab-", ".json")
+        if jsonFile:
+            runJsonToXLSX(jsonFile)
+
+        if not askUserForNewQuery():
+            print("\nEncerrando o programa.\n")
+            return
 
 if __name__ == "__main__":
     main()
