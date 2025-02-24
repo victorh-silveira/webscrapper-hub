@@ -1,26 +1,24 @@
-# Usa a imagem oficial do Python 3.12 como base
 FROM python:3.12
 
-# Define o diretório de trabalho dentro do container
 WORKDIR /app
 
-# Copia apenas o arquivo de dependências para otimizar o cache do Docker
-COPY requirements.txt .
+ENV PYTHONUNBUFFERED=1
 
-# Atualiza o pip e instala as dependências
+RUN apt-get update && apt-get upgrade -y && apt-get autoremove -y && apt-get clean
+
+COPY requirements.txt .
 RUN pip install --upgrade pip && \
     pip install --no-cache-dir -r requirements.txt
 
-# Copia o restante do código para o container
-COPY scripts/ ./scripts/
-COPY utils/ ./utils/
-COPY main.py ./
+COPY . .
 
-# Cria os diretórios necessários para armazenar os arquivos JSON e XLSX
 RUN mkdir -p /app/data/json /app/data/xlsx
 
-# Define um volume para persistir os arquivos JSON/XLSX no host
 VOLUME ["/app/data"]
 
-# Garante que os diretórios existem antes de rodar o script
-CMD ["/bin/sh", "-c", "mkdir -p /app/data/json /app/data/xlsx && python main.py"]
+CMD ["python", "main.py"]
+
+### COMMANDS
+# DOCKER BUID: docker build -t webscrap-tjsp .
+# DOCKER RUN: docker run --rm -it -v "$(pwd)/data:/app/data" webscrap-tjsp
+# DOCKER RUN ACESSO BASH: docker run --rm -it -v "$(pwd)/data:/app/data" --entrypoint /bin/bash webscrap-tjsp
